@@ -1,0 +1,25 @@
+# TodoMVC in Elm, with Ionic Capacitor!
+
+This repo is a minimal port of the classic [evancz/elm-todomvc](https://github.com/evancz/elm-todomvc) application, with the additional infrastructure necessary to run as a native, cross-platform mobile application powered by [Ionic Capacitor](https://capacitorjs.com/docs/).
+
+**All of the application code is in Elm!** To get started quickly, simply fork this repo, then scroll on down to the [Caveats](#caveats) section for a brief overview of what you'll need to change in order to build a native mobile application with Elm + Ionic Capacitor.
+
+But wait - there's more! This repo serves as a tutorial. I've tried to build the different layers of this application as a set of pull requests that are all linked in this document. The comments on the pull request show which changes were made, when, and why - and you can read an overview for each major changeset here in this readme, as well.
+
+If you have questions, feel free to shoot me a DM in [Elm Slack](https://elmlang.slack.com/), or ping me on Twitter - [@lambdapriest](https://twitter.com/lambdapriest).
+
+## Step 1 - Start with an existing Elm application (or make a new one!)
+
+For this demo application, I've started with an existing app; but you can do whatever you like. There are some limitations, though; you'll have to create a [`Browser.element`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#element) application. (For more notes on this, see [Caveats - URL Routing / Navigation](#url-routing--navigation).)
+
+
+
+## Caveats
+
+### URL Routing / Navigation
+
+Due to limitations with Elm's URL routing and due to constraints on web views in iOS, you can't give your Elm application full control of the DOM, so you can't create your app as a [`Browser.application`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#application). The biggest limitation here is that you can't use `elm/url` routes or browser navigation - but that's really not a big deal!
+
+URL routing only really matters when the URL bar should be available to the user as a means of input. Since the URL bar in the web viewer is hidden for an Ionic Capacitor app, you don't need to worry about it at all! You can simply store a value on your `Model` that tracks your user's location in the app, and you can retrieve that value from local storage when your app loads, through your flags.
+
+For this reason, I strongly recommend using a [`Browser.element`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#element) - so that you can use flags to send input parameters to your application, and so that you can use ports to set and retrieve values from the web viewer's local storage (which is persisted on the mobile filesystem). You can also use a [`Browser.document`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#document), but since your users will never see the `<title>` of the page, there's not really any reason to.
