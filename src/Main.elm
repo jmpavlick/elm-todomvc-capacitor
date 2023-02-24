@@ -29,12 +29,26 @@ main =
     Browser.document
         { init = init
         , view = \{ model } -> { title = "Elm • TodoMVC", body = [ view model ] }
-        , update =
-            \msg application ->
-                updateWithStorage msg application
-                    |> Tuple.mapFirst (\model -> { application | model = model })
+        , update = updateApplication
         , subscriptions = \_ -> Sub.none
         }
+
+
+{-| We have added this function, as well as the Application type, to prevent
+our static environmental data from being able to be changed when the application
+updates.
+
+The trick is that our `updateWithStorage` and `update` functions both
+accept an `Application` value as input (i.e., they should know about our static
+environmental data) - but return a `(Model, Cmd Msg)` - i.e., they are unable to
+actually update any of the data in the `Application` value that isn't part of
+its `model` field.
+
+-}
+updateApplication : Msg -> Application -> ( Application, Cmd Msg )
+updateApplication msg application =
+    updateWithStorage msg application
+        |> Tuple.mapFirst (\model -> { application | model = model })
 
 
 port setStorage : Model -> Cmd msg
