@@ -20,6 +20,11 @@ elm make src/Main.elm --output=elm.js
 
 Then opening `index.html` in a web browser.
 
+## Step 2 - npm and a bundler
+
+We'll need npm in order to install the dependencies we need to get going with Capacitor; and if we get set up with a bundler now, we can have nice things like build-on-save while we're working.
+
+
 ## Caveats
 
 ### URL Routing / Navigation
