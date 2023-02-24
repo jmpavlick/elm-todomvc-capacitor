@@ -10,9 +10,11 @@ If you have questions, feel free to shoot me a DM in [Elm Slack](https://elmlang
 
 ## Step 1 - Start with an existing Elm application (or make a new one!)
 
+> [Pull Request](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/1)
+
 For this demo application, I've started with an existing app; but you can do whatever you like. There are some limitations, though; you'll have to create a [`Browser.element`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#element) or [`Browser.document`](https://package.elm-lang.org/packages/elm/browser/latest/Browser#document) application. (For more notes on this, see [Caveats - URL Routing / Navigation](#url-routing--navigation).)
 
-This repo starts with a simple Elm app that only contains what's absolutely necessary - an `elm.json` file, a `src/Main.elm` file, and an `index.html` file to host the built JavaScript. In fact, if you check out the project and navigate to the Git hash that was merged in during [the Step 1 PR](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/1), you can build the app just by navigating to the root of the projec,t and running:
+This repo starts with a simple Elm app that only contains what's absolutely necessary - an `elm.json` file, a `src/Main.elm` file, and an `index.html` file to host the built JavaScript. In fact, if you check out the project and navigate to the Git hash that was merged in during [the Step 1 PR](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/1), you can build the app just by navigating to the root of the project, and running:
 
 ```
 elm make src/Main.elm --output=elm.js
@@ -22,7 +24,7 @@ Then opening `index.html` in a web browser.
 
 ## Step 2 - npm and a bundler
 
-> [Pull Request](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/new/02-npm-and-a-bundler)
+> [Pull Request](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/2)
 
 We'll need npm in order to install the dependencies we need to get going with Capacitor; and if we get set up with a bundler now, we can have nice things like build-on-save while we're working.
 
