@@ -1,0 +1,6 @@
+{
+  "appId": "com.example.elmtodomvccapacitor",
+  "appName": "elm-todomvc-capacitor",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

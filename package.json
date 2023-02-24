@@ -4,7 +4,11 @@
   "description": "This repo is a minimal port of the classic [evancz/elm-todomvc](https://github.com/evancz/elm-todomvc) application, with the additional infrastructure necessary to run as a native, cross-platform mobile application powered by [Ionic Capacitor](https://capacitorjs.com/docs/).",
   "main": "index.mjs",
   "scripts": {
-    "start": "NODE_ENV=DEV vite --host"
+    "open-android": "npx cap open android",
+    "open-ios": "npx cap open ios",
+    "start": "NODE_ENV=DEV vite --host",
+    "sync": "vite build && npx cap sync",
+    "sync-dev": "NODE_ENV=DEV vite build && npx cap sync"
   },
   "repository": {
     "type": "git",
@@ -17,7 +21,13 @@
   },
   "homepage": "https://github.com/jmpavlick/elm-todomvc-capacitor#readme",
   "dependencies": {
+    "@capacitor/android": "^4.7.0",
+    "@capacitor/core": "^4.7.0",
+    "@capacitor/ios": "^4.7.0",
     "vite": "^3.2.5",
     "vite-plugin-elm": "^2.7.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^4.7.0"
   }
 }
