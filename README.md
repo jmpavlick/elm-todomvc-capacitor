@@ -6,7 +6,7 @@ This repo is a minimal port of the classic [evancz/elm-todomvc](https://github.c
 
 But wait - there's more! This repo serves as a tutorial. I've tried to build the different layers of this application as a set of pull requests that are all linked in this document. The comments on the pull request show which changes were made, when, and why - and you can read an overview for each major changeset here in this readme, as well.
 
-If you have questions, feel free to shoot me a DM in [Elm Slack](https://elmlang.slack.com/), or ping me on Twitter [@lambdapriest](https://twitter.com/lambdapriest).
+If you have questions, feel free to shoot me a DM in [Elm Slack](https://elmlang.slack.com/), or ping me on Twitter - [@lambdapriest](https://twitter.com/lambdapriest).
 
 ## Step 1 - Start with an existing Elm application
 
