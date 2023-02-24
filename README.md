@@ -58,13 +58,27 @@ Now that we have npm and a bundler, we can add Capacitor to our project. This is
 
 * `npm install @capacitor/android @capacitor/ios`
 
+### Create the Android and iOS projects
+
+* `npx cap add android`
+* `npx cap add ios`
+
+This will create Android and / or iOS projects (depending on what platform plugins you have installed, and which of these commands you run), at `android/` and `ios/` respectively.
+
+The iOS project has a dependency on [CocoaPods](https://cocoapods.org/), so you'll need to install that. My preferred method is to install it via [Homebrew](https://brew.sh/). I've added a `Brewfile` to this project; if you have Homebrew installed already, simply run
+
+```
+brew bundle
+```
+
+from the root directory, before you run `npx cap add ios`.
+
 ### Sync
 
 Here's where we diverge slightly from the docs.
 
 If you run `npx cap sync`, Capacitor will:
 
-* Create Android and / or iOS projects (depending on what platform plugins you have installed), at `android/` and `ios/` respectively
 * Copy whatever's in the folder specified in the `webDir` value of `capacitor.config.json` - for us, that's `dist` - into those projects
 
 Right now, our `dist` folder contains whatever Vite bundled the last time it ran - if it even ran at all (i.e., if your project is building in a CI pipeline, or if a friend is helping you and they just pulled this repo down on their computer). When we finish our app and want to release it to the App Store, we'll need to make sure that our built output doesn't include the Elm debugger; so it's helpful to wrap the call to `npx cap sync` in another npm script so that we can specify the environment that our Elm app is building in.
