@@ -52,7 +52,27 @@ Now that we have npm and a bundler, we can add Capacitor to our project. This is
 
 ### Initialize Capacitor
 
-* `npx cap init`, and follow the prompts
+* `npx cap init`, and follow the prompts. This creates `capacitor.config.json`.
+
+### Install the Android and iOS platform plugins
+
+* `npm install @capacitor/android @capacitor/ios`
+
+### Sync
+
+Here's where we diverge slightly from the docs.
+
+If you run `npx cap sync`, Capacitor will:
+
+* Create Android and / or iOS projects (depending on what platform plugins you have installed), at `android/` and `ios/` respectively
+* Copy whatever's in the folder specified in the `webDir` value of `capacitor.config.json` - for us, that's `dist` - into those projects
+
+Right now, our `dist` folder contains whatever Vite bundled the last time it ran - if it even ran at all (i.e., if your project is building in a CI pipeline, or if a friend is helping you and they just pulled this repo down on their computer). When we finish our app and want to release it to the App Store, we'll need to make sure that our built output doesn't include the Elm debugger; so it's helpful to wrap the call to `npx cap sync` in another npm script so that we can specify the environment that our Elm app is building in.
+
+So to enable this, we've added two more npm scripts:
+
+* `sync-dev`: Runs the Vite build with `NODE_ENV=DEV`, then runs `npx cap sync`
+* `sync`: Same as `sync-dev`, but without `NODE_ENV=DEV` so that our built output is optimized and has the Elm debugger removed
 
 
 ## Caveats
