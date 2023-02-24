@@ -30,7 +30,6 @@ We'll need npm in order to install the dependencies we need to get going with Ca
 
 In this step, we installed the following npm packages:
 
-* `elm-format`
 * `vite`
 * `vite-plugin-elm`
 
