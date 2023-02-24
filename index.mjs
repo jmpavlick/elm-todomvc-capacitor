@@ -4,8 +4,11 @@ import { SafeArea } from 'capacitor-plugin-safe-area';
 
 const getSafeAreaTopInPx = SafeArea.getSafeAreaInsets().then(({ insets }) => insets.top );
 
+
 try {
-  Promise.all([Device.getInfo(), getSafeAreaTopInPx]).then(([{ isVirtual, maybeSafeAreaTopInPx }]) => {
+  Promise.all([Device.getInfo(), getSafeAreaTopInPx]).then(([{ isVirtual }, maybeSafeAreaTopInPx]) => {
+
+    console.log("maybeSafeAreaTopInPx: " + maybeSafeAreaTopInPx);
 
     var storedState = localStorage.getItem("elm-todo-save");
     var startingState = storedState ? JSON.parse(storedState) : null;

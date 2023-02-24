@@ -48,7 +48,7 @@ its `model` field.
 updateApplication : Msg -> Application -> ( Application, Cmd Msg )
 updateApplication msg application =
     updateWithStorage msg application
-        |> Tuple.mapFirst (\model -> { application | model = model })
+        |> Tuple.mapFirst (\model -> { application | model = model } |> Debug.log "application")
 
 
 port setStorage : Model -> Cmd msg
