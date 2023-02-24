@@ -39,6 +39,22 @@ We added `vite-plugin-elm`, because it lets you import your `src/Main.elm` file 
 
 Finally, we added a simple npm script, `start`. It sets the `NODE_ENV` environment variable to `DEV` and runs `vite --host`. Our `vite.config.js` uses the `NODE_ENV` value to set a JSON object that it passes to the `elmPlugin` function from `vite-plugin-elm`, which sets the `--debug` and `--optimize` flags from `elm make`. (We want to se the debugger when we're in our development environment, but we don't want to see it when we do a release build.)
 
+## Step 3 - Install Capacitor and make it runnable on Android and iOS
+
+> [Pull Request](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/3)
+
+Now that we have npm and a bundler, we can add Capacitor to our project. This is remarkably simple - the docs are [here](https://capacitorjs.com/docs/getting-started#add-capacitor-to-your-web-app), but I'll summarize:
+
+### Install Capacitor
+
+* `npm install @capacitor/core`
+* `npm install -D @capacitor/cli`
+
+### Initialize Capacitor
+
+* `npx cap init`, and follow the prompts
+
+
 ## Caveats
 
 ### URL Routing / Navigation
