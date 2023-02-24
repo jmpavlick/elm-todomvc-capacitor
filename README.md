@@ -24,6 +24,13 @@ Then opening `index.html` in a web browser.
 
 We'll need npm in order to install the dependencies we need to get going with Capacitor; and if we get set up with a bundler now, we can have nice things like build-on-save while we're working.
 
+In this step, we installed the following npm packages:
+
+* `elm-format`
+* `vite`
+* `vite-plugin-elm`
+
+Then, we refactored the little bit of JavaScript that hosts our `elm.js` file into a module called `index.mjs`, which will make it easier to integrate with our bundler, Vite, as well as with some of the other Capacitor packages we'll need.
 
 ## Caveats
 

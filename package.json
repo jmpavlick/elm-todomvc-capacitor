@@ -2,9 +2,9 @@
   "name": "elm-todomvc-capacitor",
   "version": "1.0.0",
   "description": "This repo is a minimal port of the classic [evancz/elm-todomvc](https://github.com/evancz/elm-todomvc) application, with the additional infrastructure necessary to run as a native, cross-platform mobile application powered by [Ionic Capacitor](https://capacitorjs.com/docs/).",
-  "main": "elm.js",
+  "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=DEV vite --host"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/jmpavlick/elm-todomvc-capacitor/issues"
   },
-  "homepage": "https://github.com/jmpavlick/elm-todomvc-capacitor#readme"
+  "homepage": "https://github.com/jmpavlick/elm-todomvc-capacitor#readme",
+  "dependencies": {
+    "elm-format": "^0.8.5",
+    "vite": "^3.2.5",
+    "vite-plugin-elm": "^2.7.2"
+  }
 }
