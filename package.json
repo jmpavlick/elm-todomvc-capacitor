@@ -1,0 +1,19 @@
+{
+  "name": "elm-todomvc-capacitor",
+  "version": "1.0.0",
+  "description": "This repo is a minimal port of the classic [evancz/elm-todomvc](https://github.com/evancz/elm-todomvc) application, with the additional infrastructure necessary to run as a native, cross-platform mobile application powered by [Ionic Capacitor](https://capacitorjs.com/docs/).",
+  "main": "elm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmpavlick/elm-todomvc-capacitor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmpavlick/elm-todomvc-capacitor/issues"
+  },
+  "homepage": "https://github.com/jmpavlick/elm-todomvc-capacitor#readme"
+}
