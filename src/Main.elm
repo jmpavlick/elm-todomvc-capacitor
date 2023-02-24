@@ -24,12 +24,15 @@ import Json.Decode as Json
 import Task
 
 
-main : Program (Maybe Model) Model Msg
+main : Program Flags Application Msg
 main =
     Browser.document
         { init = init
-        , view = \model -> { title = "Elm • TodoMVC", body = [ view model ] }
-        , update = updateWithStorage
+        , view = \{ model } -> { title = "Elm • TodoMVC", body = [ view model ] }
+        , update =
+            \msg application ->
+                updateWithStorage msg application
+                    |> Tuple.mapFirst (\model -> { application | model = model })
         , subscriptions = \_ -> Sub.none
         }
 
@@ -40,15 +43,37 @@ port setStorage : Model -> Cmd msg
 {-| We want to `setStorage` on every update. This function adds the setStorage
 command for every step of the update function.
 -}
-updateWithStorage : Msg -> Model -> ( Model, Cmd Msg )
-updateWithStorage msg model =
+updateWithStorage : Msg -> Application -> ( Model, Cmd Msg )
+updateWithStorage msg application =
     let
         ( newModel, cmds ) =
-            update msg model
+            update msg application
     in
     ( newModel
     , Cmd.batch [ setStorage newModel, cmds ]
     )
+
+
+
+-- FLAGS
+-- A type that handles our input from the runtime, during initialization
+
+
+type alias Flags =
+    { maybeModel : Maybe Model
+    , isVirtual : Bool
+    }
+
+
+
+-- APPLICATION
+-- A type that wraps our Model and our static runtime information
+
+
+type alias Application =
+    { model : Model
+    , isVirtual : Bool
+    }
 
 
 
@@ -90,9 +115,11 @@ newEntry desc id =
     }
 
 
-init : Maybe Model -> ( Model, Cmd Msg )
-init maybeModel =
-    ( Maybe.withDefault emptyModel maybeModel
+init : Flags -> ( Application, Cmd Msg )
+init { maybeModel, isVirtual } =
+    ( { model = Maybe.withDefault emptyModel maybeModel
+      , isVirtual = isVirtual
+      }
     , Cmd.none
     )
 
@@ -122,8 +149,8 @@ type Msg
 -- How we update our Model on a given Msg?
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update : Msg -> Application -> ( Model, Cmd Msg )
+update msg { model } =
     case msg of
         NoOp ->
             ( model, Cmd.none )

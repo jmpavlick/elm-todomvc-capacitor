@@ -23,6 +23,7 @@
   "dependencies": {
     "@capacitor/android": "^4.7.0",
     "@capacitor/core": "^4.7.0",
+    "@capacitor/device": "^4.1.0",
     "@capacitor/ios": "^4.7.0",
     "vite": "^3.2.5",
     "vite-plugin-elm": "^2.7.2"
