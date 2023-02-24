@@ -113,6 +113,7 @@ To fix this, we're going to wire in some of Capacitor's platform hooks, so that 
 In order to access those hooks, we'll need to:
 
 * `npm install @capacitor/device`
+* `npm install capacitor-plugin-safe-area`
 
 ## Caveats
 
