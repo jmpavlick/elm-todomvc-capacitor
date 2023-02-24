@@ -79,9 +79,7 @@ from the root directory, before you run `npx cap add ios`.
 
 Here's where we diverge slightly from the docs.
 
-If you run `npx cap sync`, Capacitor will:
-
-* Copy whatever's in the folder specified in the `webDir` value of `capacitor.config.json` - for us, that's `dist` - into those projects
+If you run `npx cap sync`, Capacitor will copy whatever's in the folder specified in the `webDir` value of `capacitor.config.json` - for us, that's `"dist"` - into those projects.
 
 Right now, our `dist` folder contains whatever Vite bundled the last time it ran - if it even ran at all (i.e., if your project is building in a CI pipeline, or if a friend is helping you and they just pulled this repo down on their computer). When we finish our app and want to release it to the App Store, we'll need to make sure that our built output doesn't include the Elm debugger; so it's helpful to wrap the call to `npx cap sync` in another npm script so that we can specify the environment that our Elm app is building in.
 
