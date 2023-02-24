@@ -2,3 +2,7 @@ elm-stuff
 elm.js
 .DS_Store
 node_modules/**
+
+# Android Studio and Xcode workspace settings
+android/.idea/
+ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/*
