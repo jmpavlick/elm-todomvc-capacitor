@@ -94,7 +94,7 @@ You can run `npx cap open android` to open your Android project in [Android Stud
 
 Because I hate remembering commands, I've added these as npm scripts - `open-android` and `open-ios`, respectively. Adding them to my `package.json` ensures that all of the commands that I need to run in order to work on this application are _written down somewhere_ as part of my project.
 
-> **Note**: Capacitor doesn't actually build binaries of your mobile apps for their respective platforms; it just maintains a project directory for each platform, and copies your web artifacts over when you run `npx cap sync`. If you're using Windows or Linux, you'll still have to have a Mac to build and run your project; fortunately, cloud CI solutions exist!
+> **Note**: Capacitor doesn't actually build binaries of your mobile apps for their respective platforms; it just maintains a project directory for each platform, and copies your web artifacts over when you run `npx cap sync`. If you're using Windows or Linux, you'll still have to have a Mac to build and run an iOS project; fortunately, cloud CI solutions exist!
 
 Now that your project is open, you can build and run it in the simulator of your choice! You'll notice that the app isn't drawing correctly in the viewport - depending on the simulator you run with, perhaps a "notch" is covering part of the content; perhaps the content is sized poorly or off-center; and when you tap a text input to enter a "todo" item, the display may zoom in on the field while the keyboard opens.
 
