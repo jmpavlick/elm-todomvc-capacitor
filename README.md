@@ -8,5 +8,8 @@ But wait - there's more! This repo serves as a tutorial. I've tried to build the
 
 If you have questions, feel free to shoot me a DM in [Elm Slack](https://elmlang.slack.com/), or ping me on Twitter [@lambdapriest](https://twitter.com/lambdapriest).
 
+## Step 1 - Start with an existing Elm application
+
+
 
 ## Caveats
