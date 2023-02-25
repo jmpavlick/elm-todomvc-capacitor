@@ -76,7 +76,8 @@ updateWithStorage msg application =
 type alias Flags =
     { maybeModel : Maybe Model
     , isVirtual : Bool
-    , maybeSafeAreaTopInPx : Maybe Int
+    , safeAreaTopInPx : Int
+    , safeAreaBottomInPx : Int
     }
 
 
@@ -89,6 +90,7 @@ type alias Application =
     { model : Model
     , isVirtual : Bool
     , safeAreaTopInPx : Int
+    , safeAreaBottomInPx : Int
     }
 
 
@@ -132,10 +134,11 @@ newEntry desc id =
 
 
 init : Flags -> ( Application, Cmd Msg )
-init { maybeModel, isVirtual, maybeSafeAreaTopInPx } =
+init { maybeModel, isVirtual, safeAreaTopInPx, safeAreaBottomInPx } =
     ( { model = Maybe.withDefault emptyModel maybeModel
       , isVirtual = isVirtual
-      , safeAreaTopInPx = Maybe.withDefault 0 maybeSafeAreaTopInPx
+      , safeAreaTopInPx = safeAreaTopInPx
+      , safeAreaBottomInPx = safeAreaBottomInPx
       }
     , Cmd.none
     )
