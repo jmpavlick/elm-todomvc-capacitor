@@ -2,10 +2,10 @@ import { Elm } from "./src/Main.elm";
 import { Device } from "@capacitor/device";
 import { SafeArea } from 'capacitor-plugin-safe-area';
 
-const getSafeAreaTopInPx = SafeArea.getSafeAreaInsets().then(({ insets }) => [ insets.top, insets.bottom ] );
+const getSafeAreaTopInPx = SafeArea.getSafeAreaInsets().then(({ insets }) => insets.top );
 
 try {
-  Promise.all([Device.getInfo(), getSafeAreaTopInPx]).then(([{ isVirtual }, [ safeAreaTopInPx, safeAreaBottomInPx ] ]) => {
+  Promise.all([Device.getInfo(), getSafeAreaTopInPx]).then(([{ isVirtual }, safeAreaTopInPx ]) => {
 
     var storedState = localStorage.getItem("elm-todo-save");
     var startingState = storedState ? JSON.parse(storedState) : null;
@@ -14,8 +14,7 @@ try {
       flags: {
         maybeModel: startingState,
         isVirtual: isVirtual,
-        safeAreaTopInPx: safeAreaTopInPx,
-        safeAreaBottomInPx: safeAreaBottomInPx
+        safeAreaTopInPx: safeAreaTopInPx
       },
     });
 

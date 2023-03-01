@@ -28,7 +28,7 @@ main : Program Flags Application Msg
 main =
     Browser.document
         { init = init
-        , view = \{ model } -> { title = "Elm • TodoMVC", body = [ view model ] }
+        , view = \application -> { title = "Elm • TodoMVC", body = [ viewport view application ] }
         , update = updateApplication
         , subscriptions = \_ -> Sub.none
         }
@@ -77,7 +77,6 @@ type alias Flags =
     { maybeModel : Maybe Model
     , isVirtual : Bool
     , safeAreaTopInPx : Int
-    , safeAreaBottomInPx : Int
     }
 
 
@@ -90,7 +89,6 @@ type alias Application =
     { model : Model
     , isVirtual : Bool
     , safeAreaTopInPx : Int
-    , safeAreaBottomInPx : Int
     }
 
 
@@ -134,11 +132,10 @@ newEntry desc id =
 
 
 init : Flags -> ( Application, Cmd Msg )
-init { maybeModel, isVirtual, safeAreaTopInPx, safeAreaBottomInPx } =
+init { maybeModel, isVirtual, safeAreaTopInPx } =
     ( { model = Maybe.withDefault emptyModel maybeModel
       , isVirtual = isVirtual
       , safeAreaTopInPx = safeAreaTopInPx
-      , safeAreaBottomInPx = safeAreaBottomInPx
       }
     , Cmd.none
     )
@@ -263,6 +260,22 @@ update msg { model } =
 
 
 -- VIEW
+
+
+viewport : (Model -> Html msg) -> Application -> Html msg
+viewport viewFn { model, isVirtual, safeAreaTopInPx } =
+    div []
+        [ div
+            [ style "min-height" (String.fromInt safeAreaTopInPx ++ "px")
+            , if isVirtual then
+                style "background-color" "lightred"
+
+              else
+                class ""
+            ]
+            []
+        , div [] [ viewFn model ]
+        ]
 
 
 view : Model -> Html Msg
