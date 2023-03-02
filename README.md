@@ -124,6 +124,7 @@ In order to access those hooks, we'll need to:
 The two values we care most about are:
 
 * Is this app running on a device, or an an emulator (i.e., is it virtual or not)?
+    * Believe it or not, we _really care about this_ - if, for instance, you want to show ads in your app? You had better make sure that your app doesn't show ads during testing, because Google will flag your AdMob account for "generating fraudulent ad traffic" when it runs your app in hundreds of testing VMs to make sure that it boots on every possible version of Android, ever; and that is _not fun_ (ask me how I know).
 * What's the offset for the "safe area" at the top of the screen? How much padding do we need so that we don't accidentally draw behind a notch or camera hole?
 
 You'll have to update `index.mjs` to call the functions from `@capacitor/device` and `capacitor-plugin-safe-area` in order to pull back device info and send it in as part of your flags value; and update `src/Main.elm` to accept the updated flags value, as well as operate on the new values you're sending in.
@@ -131,6 +132,30 @@ You'll have to update `index.mjs` to call the functions from `@capacitor/device`
 Finally, we need to add _one line of code_ to `index.html` to set our Capacitor app's browser to constrain the content to the width of the device, and to disable zooming.
 
 (The [pull request](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/4) dives in a little deeper here with the code changes; it's recommended reading!)
+
+## Step 5 - Icons and Splashscreen
+
+> [Pull Request](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/5)
+
+In order to release your application on the App Store and Google Play Store, you're going to need app icons and a splashscreen. Since we're letting Capacitor control virtually all of the particularities about building our apps, we'll also need to use Capacitor tooling to generate our app icons and splashscreen and build them into our Xcode and Android Studio projects.
+
+Fortunately, `cordova-res` makes this easy. Just run:
+
+* `npm install cordova-res` [docs](https://www.npmjs.com/package/cordova-res)
+
+I've added an npm script, `icons-splashscreen`, to call it with the appropriate arguments and generate the resources, and I've added the call to `npm run icons-splashscreen` in to the `sync` and `sync-dev` scripts, for convenience's sake.
+
+## Step 6 - The App Store / Play Store, And Beyond!
+
+Just kidding! Once you've got your app "done", you'll have to run the gauntlet to get your app uploaded, approved, submitted, and so on and so forth.
+
+Fortunately, once you can build your app with Xcode and Android Studio - the rest of the process is pretty straightforward, and just like releasing any other app. There's more than enough written on the Internet about that, so I'll leave this part as an exercise for the reader.
+
+Of course, there are other Capacitor plugins that you can use to access native device functionality - and since Capacitor is based on [Apache Cordova](https://cordova.apache.org/), there are [many other plugins](https://cordova.apache.org/plugins/) that you may be able to use.
+
+Congrats! If you've made it this far and you still have questions - find me in [Elm Slack](https://elmlang.slack.com) as `@jmpavlick`, or on Twitter [@lambdapriest](https://twitter.com/lambdapriest).
+
+If you've found any of this to be in error, PRs are always welcome.
 
 ## Caveats
 

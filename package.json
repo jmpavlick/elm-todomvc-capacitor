@@ -4,11 +4,12 @@
   "description": "This repo is a minimal port of the classic [evancz/elm-todomvc](https://github.com/evancz/elm-todomvc) application, with the additional infrastructure necessary to run as a native, cross-platform mobile application powered by [Ionic Capacitor](https://capacitorjs.com/docs/).",
   "main": "index.mjs",
   "scripts": {
+    "icons-splashscreen": "mkdir -p resources/android; cp resources/icon.png resources/android/icon-foreground.png; cp resources/icon.png resources/android/icon-background.png; cordova-res ios --skip-config --copy; cordova-res android --skip-config --copy",
     "open-android": "npx cap open android",
     "open-ios": "npx cap open ios",
     "start": "ENV=DEV vite --host",
-    "sync": "vite build && npx cap sync",
-    "sync-dev": "ENV=DEV vite build; npx cap sync"
+    "sync": "vite build; npm run icons-splashscreen; npx cap sync",
+    "sync-dev": "ENV=DEV vite build; npm run icons-splashscreen; npx cap sync"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "@capacitor/device": "^4.1.0",
     "@capacitor/ios": "^4.7.0",
     "capacitor-plugin-safe-area": "^1.0.1",
+    "cordova-res": "^0.15.4",
     "vite": "^3.2.5",
     "vite-plugin-elm": "^2.7.2"
   },
