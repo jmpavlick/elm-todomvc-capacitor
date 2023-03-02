@@ -6,9 +6,9 @@
   "scripts": {
     "open-android": "npx cap open android",
     "open-ios": "npx cap open ios",
-    "start": "NODE_ENV=DEV vite --host",
+    "start": "ENV=DEV vite --host",
     "sync": "vite build && npx cap sync",
-    "sync-dev": "NODE_ENV=DEV vite build && npx cap sync"
+    "sync-dev": "ENV=DEV vite build; npx cap sync"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
   "dependencies": {
     "@capacitor/android": "^4.7.0",
     "@capacitor/core": "^4.7.0",
+    "@capacitor/device": "^4.1.0",
     "@capacitor/ios": "^4.7.0",
+    "capacitor-plugin-safe-area": "^1.0.1",
     "vite": "^3.2.5",
     "vite-plugin-elm": "^2.7.2"
   },

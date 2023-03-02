@@ -24,31 +24,66 @@ import Json.Decode as Json
 import Task
 
 
-main : Program (Maybe Model) Model Msg
+main : Program Flags Application Msg
 main =
     Browser.document
         { init = init
-        , view = \model -> { title = "Elm • TodoMVC", body = [ view model ] }
-        , update = updateWithStorage
+        , view = \application -> { title = "Elm • TodoMVC", body = [ viewport view application ] }
+        , update = updateApplicationWithStorage
         , subscriptions = \_ -> Sub.none
         }
+
+
+{-| We have changed this function, as well as added the Application type, to prevent
+our static environmental data from being able to be changed when the application
+updates.
+
+The trick is that our `update` function's new type signature is
+
+    update : Msg -> Application -> ( Model, Cmd Msg )
+
+It takes an `Application` as input, but can only return a `( Model, Cmd Msg )` -
+this gives us our `isVirtual` and `safeAreaSizeInPx` values in-scope for `update`,
+if we want them - but doesn't let our `update` function change them, since they
+should never change after they're initialized.
+
+-}
+updateApplicationWithStorage : Msg -> Application -> ( Application, Cmd Msg )
+updateApplicationWithStorage msg application =
+    let
+        ( newModel, cmds ) =
+            update msg application
+    in
+    ( { application | model = newModel }
+    , Cmd.batch [ setStorage newModel, cmds ]
+    )
 
 
 port setStorage : Model -> Cmd msg
 
 
-{-| We want to `setStorage` on every update. This function adds the setStorage
-command for every step of the update function.
--}
-updateWithStorage : Msg -> Model -> ( Model, Cmd Msg )
-updateWithStorage msg model =
-    let
-        ( newModel, cmds ) =
-            update msg model
-    in
-    ( newModel
-    , Cmd.batch [ setStorage newModel, cmds ]
-    )
+
+-- FLAGS
+-- A type that handles our input from the runtime, during initialization
+
+
+type alias Flags =
+    { maybeModel : Maybe Model
+    , isVirtual : Bool
+    , safeAreaTopInPx : Int
+    }
+
+
+
+-- APPLICATION
+-- A type that wraps our Model and our static runtime information
+
+
+type alias Application =
+    { model : Model
+    , isVirtual : Bool
+    , safeAreaTopInPx : Int
+    }
 
 
 
@@ -90,9 +125,12 @@ newEntry desc id =
     }
 
 
-init : Maybe Model -> ( Model, Cmd Msg )
-init maybeModel =
-    ( Maybe.withDefault emptyModel maybeModel
+init : Flags -> ( Application, Cmd Msg )
+init { maybeModel, isVirtual, safeAreaTopInPx } =
+    ( { model = Maybe.withDefault emptyModel maybeModel
+      , isVirtual = isVirtual
+      , safeAreaTopInPx = safeAreaTopInPx
+      }
     , Cmd.none
     )
 
@@ -122,8 +160,8 @@ type Msg
 -- How we update our Model on a given Msg?
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update : Msg -> Application -> ( Model, Cmd Msg )
+update msg { model } =
     case msg of
         NoOp ->
             ( model, Cmd.none )
@@ -216,6 +254,22 @@ update msg model =
 
 
 -- VIEW
+
+
+viewport : (Model -> Html msg) -> Application -> Html msg
+viewport viewFn { model, isVirtual, safeAreaTopInPx } =
+    div []
+        [ div
+            [ style "min-height" (String.fromInt safeAreaTopInPx ++ "px")
+            , if isVirtual then
+                style "background-color" "lightred"
+
+              else
+                class ""
+            ]
+            []
+        , div [] [ viewFn model ]
+        ]
 
 
 view : Model -> Html Msg

@@ -2,6 +2,7 @@ elm-stuff
 elm.js
 .DS_Store
 node_modules/**
+dist/**
 
 # Android Studio and Xcode workspace settings
 android/.idea/
