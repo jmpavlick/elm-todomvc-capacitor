@@ -153,7 +153,7 @@ Fortunately, once you can build your app with Xcode and Android Studio - the res
 
 Of course, there are other Capacitor plugins that you can use to access native device functionality - and since Capacitor is based on [Apache Cordova](https://cordova.apache.org/), there are [many other plugins](https://cordova.apache.org/plugins/) that you may be able to use.
 
-Congrats! If you've made it this far and you still have questions - find me in [Elm Slack](https://elmlang.slack.com) as `@jmpavlick`, or on Twitter [@lambdapriest](https://twitter.com/lambdapriest).
+Congrats! If you've made it this far and you still have questions - again, you can find me in [Elm Slack](https://elmlang.slack.com) as `@jmpavlick`, or on Twitter [@lambdapriest](https://twitter.com/lambdapriest).
 
 If you've found any of this to be in error, PRs are always welcome.
 
