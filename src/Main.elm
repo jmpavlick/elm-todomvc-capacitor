@@ -29,43 +29,37 @@ main =
     Browser.document
         { init = init
         , view = \application -> { title = "Elm • TodoMVC", body = [ viewport view application ] }
-        , update = updateApplication
+        , update = updateApplicationWithStorage
         , subscriptions = \_ -> Sub.none
         }
 
 
-{-| We have added this function, as well as the Application type, to prevent
+{-| We have changed this function, as well as added the Application type, to prevent
 our static environmental data from being able to be changed when the application
 updates.
 
-The trick is that our `updateWithStorage` and `update` functions both
-accept an `Application` value as input (i.e., they should know about our static
-environmental data) - but return a `(Model, Cmd Msg)` - i.e., they are unable to
-actually update any of the data in the `Application` value that isn't part of
-its `model` field.
+The trick is that our `update` function's new type signature is
+
+    update : Msg -> Application -> ( Model, Cmd Msg )
+
+It takes an `Application` as input, but can only return a `( Model, Cmd Msg )` -
+this gives us our `isVirtual` and `safeAreaSizeInPx` values in-scope for `update`,
+if we want them - but doesn't let our `update` function change them, since they
+should never change after they're initialized.
 
 -}
-updateApplication : Msg -> Application -> ( Application, Cmd Msg )
-updateApplication msg application =
-    updateWithStorage msg application
-        |> Tuple.mapFirst (\model -> { application | model = model } |> Debug.log "application")
-
-
-port setStorage : Model -> Cmd msg
-
-
-{-| We want to `setStorage` on every update. This function adds the setStorage
-command for every step of the update function.
--}
-updateWithStorage : Msg -> Application -> ( Model, Cmd Msg )
-updateWithStorage msg application =
+updateApplicationWithStorage : Msg -> Application -> ( Application, Cmd Msg )
+updateApplicationWithStorage msg application =
     let
         ( newModel, cmds ) =
             update msg application
     in
-    ( newModel
+    ( { application | model = newModel }
     , Cmd.batch [ setStorage newModel, cmds ]
     )
+
+
+port setStorage : Model -> Cmd msg
 
 
 
