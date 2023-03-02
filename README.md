@@ -37,7 +37,7 @@ Then, we refactored the little bit of JavaScript in `index.html` that hosts our 
 
 We added `vite-plugin-elm`, because it lets you import your `src/Main.elm` file directly into your `index.mjs` file, which Vite automatically picks up on build. We configured the `vite.config.js` file to run `vite-plugin-elm` during our build step.
 
-Finally, we added a simple npm script, `start`. It sets the `ENV` environment variable to `DEV` and runs `vite --host`. Our `vite.config.js` uses the `NODE_ENV` value to set a JSON object that it passes to the `elmPlugin` function from `vite-plugin-elm`, which sets the `--debug` and `--optimize` flags from `elm make`. (We want to se the debugger when we're in our development environment, but we don't want to see it when we do a release build.)
+Finally, we added a simple npm script, `start`. It sets the `ENV` environment variable to `DEV` and runs `vite --host`. Our `vite.config.js` uses the `ENV` value to set a JSON object that it passes to the `elmPlugin` function from `vite-plugin-elm`, which sets the `--debug` and `--optimize` flags from `elm make`. (We want to se the debugger when we're in our development environment, but we don't want to see it when we do a release build.)
 
 ## Step 3 - Install Capacitor and make it runnable on Android and iOS
 
@@ -94,7 +94,7 @@ You can run `npx cap open android` to open your Android project in [Android Stud
 
 Because I hate remembering commands, I've added these as npm scripts - `open-android` and `open-ios`, respectively. Adding them to my `package.json` ensures that all of the commands that I need to run in order to work on this application are _written down somewhere_ as part of my project.
 
-> **Note**: Capacitor doesn't actually build binaries of your mobile apps for their respective platforms; it just maintains a project directory for each platform, and copies your web artifacts over when you run `npx cap sync`. If you're using Windows or Linux, you'll still have to have a Mac to build and run an iOS project; fortunately, cloud CI solutions exist!
+> **Note**: Capacitor doesn't actually build binaries of your mobile apps for their respective platforms; it just maintains a project for each platform, and copies your web artifacts over when you run `npx cap sync`. If you're using Windows or Linux, you'll still have to have a Mac to build and run an iOS project; fortunately, cloud CI solutions exist!
 
 Now that your project is open, you can build and run it in the simulator of your choice! You'll notice that the app isn't drawing correctly in the viewport - depending on the simulator you run with, perhaps a "notch" is covering part of the content; perhaps the content is sized poorly or off-center; and when you tap a text input to enter a "todo" item, the display may zoom in on the field while the keyboard opens.
 
@@ -147,7 +147,7 @@ I've added an npm script, `icons-splashscreen`, to call it with the appropriate 
 
 ## Step 6 - The App Store / Play Store, And Beyond!
 
-Just kidding! Once you've got your app "done", you'll have to run the gauntlet to get your app uploaded, approved, submitted, and so on and so forth.
+Just kidding! Once you've got your app "done", you'll have to run the gauntlet to get your app uploaded, submitted, approved, and so on and so forth.
 
 Fortunately, once you can build your app with Xcode and Android Studio - the rest of the process is pretty straightforward, and just like releasing any other app. There's more than enough written on the Internet about that, so I'll leave this part as an exercise for the reader.
 
