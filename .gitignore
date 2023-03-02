@@ -12,3 +12,5 @@ ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/*
 resources/android/
 resources/ios/icon
 resources/ios/splash
+android/app/src/main/res
+ios/App/App/Assets.xcassets
