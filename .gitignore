@@ -7,3 +7,8 @@ dist/**
 # Android Studio and Xcode workspace settings
 android/.idea/
 ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/*
+
+# icons
+resources/android/
+resources/ios/icon
+resources/ios/splash
