@@ -2,7 +2,7 @@
 
 This repo is a minimal port of the classic [evancz/elm-todomvc](https://github.com/evancz/elm-todomvc) application, with the additional infrastructure necessary to run as a native, cross-platform mobile application powered by [Ionic Capacitor](https://capacitorjs.com/docs/).
 
-**All of the application code is in Elm!** To get started quickly, simply fork this repo, then scroll on down to the [Caveats](#caveats) section for a brief overview of what you'll need to change in order to build a native mobile application with Elm + Ionic Capacitor.
+**All of the application code is in Elm!** To get started quickly, simply fork this repo, then scroll on down to the [Caveats](#caveats) section for a brief overview of the biggest difference between Elm applications on the web, and Elm applications in Ionic Capacitor.
 
 But wait - there's more! This repo serves as a tutorial. I've tried to build the different layers of this application as a set of pull requests that are all linked in this document. The comments on the pull request show which changes were made, when, and why - and you can read an overview for each major changeset here in this readme, as well.
 
@@ -37,7 +37,7 @@ Then, we refactored the little bit of JavaScript in `index.html` that hosts our 
 
 We added `vite-plugin-elm`, because it lets you import your `src/Main.elm` file directly into your `index.mjs` file, which Vite automatically picks up on build. We configured the `vite.config.js` file to run `vite-plugin-elm` during our build step.
 
-Finally, we added a simple npm script, `start`. It sets the `NODE_ENV` environment variable to `DEV` and runs `vite --host`. Our `vite.config.js` uses the `NODE_ENV` value to set a JSON object that it passes to the `elmPlugin` function from `vite-plugin-elm`, which sets the `--debug` and `--optimize` flags from `elm make`. (We want to se the debugger when we're in our development environment, but we don't want to see it when we do a release build.)
+Finally, we added a simple npm script, `start`. It sets the `ENV` environment variable to `DEV` and runs `vite --host`. Our `vite.config.js` uses the `NODE_ENV` value to set a JSON object that it passes to the `elmPlugin` function from `vite-plugin-elm`, which sets the `--debug` and `--optimize` flags from `elm make`. (We want to se the debugger when we're in our development environment, but we don't want to see it when we do a release build.)
 
 ## Step 3 - Install Capacitor and make it runnable on Android and iOS
 
@@ -85,8 +85,8 @@ Right now, our `dist` folder contains whatever Vite bundled the last time it ran
 
 So to enable this, we've added two more npm scripts:
 
-* `sync-dev`: Runs the Vite build with `NODE_ENV=DEV`, then runs `npx cap sync`
-* `sync`: Same as `sync-dev`, but without `NODE_ENV=DEV` so that our built output is optimized and has the Elm debugger removed
+* `sync-dev`: Runs the Vite build with `ENV=DEV`, then runs `npx cap sync`
+* `sync`: Same as `sync-dev`, but without `ENV=DEV` so that our built output is optimized and has the Elm debugger removed
 
 ### Opening Your Project
 
