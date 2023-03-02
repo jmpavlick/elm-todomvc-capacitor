@@ -6,7 +6,6 @@ const getSafeAreaTopInPx = SafeArea.getSafeAreaInsets().then(({ insets }) => ins
 
 try {
   Promise.all([Device.getInfo(), getSafeAreaTopInPx]).then(([{ isVirtual }, safeAreaTopInPx ]) => {
-
     var storedState = localStorage.getItem("elm-todo-save");
     var startingState = storedState ? JSON.parse(storedState) : null;
 
