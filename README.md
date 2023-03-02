@@ -132,6 +132,10 @@ Finally, we need to add _one line of code_ to `index.html` to set our Capacitor 
 
 (The [pull request](https://github.com/jmpavlick/elm-todomvc-capacitor/pull/4) dives in a little deeper here with the code changes; it's recommended reading!)
 
+## Step 5 - Icons and Splashscreen
+
+## Step 6 - The App Store / Play Store, And Beyond!
+
 ## Caveats
 
 ### URL Routing / Navigation
